@@ -1,0 +1,575 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+
+
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="menu-page-container">
+    <!-- Header Section -->
+    <div class="menu-header">
+        <h1>Thực Đơn</h1>
+        <p class="subtitle">Khám phá các món ăn tuyệt vời của chúng tôi</p>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control search-input" 
+                           placeholder="Tìm kiếm món ăn yêu thích...">
+                    <div class="input-group-append">
+                        <button class="btn search-btn" onclick="searchProductByName()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <section class="food_section">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filter -->
+                <div class="col-lg-3 col-md-4">
+                    <div class="filter-card sticky-top" style="top: 20px;">
+                        <div class="filter-header">
+                            <i class="fas fa-filter"></i>
+                            <h4>Bộ lọc tìm kiếm</h4>
+                        </div>
+                        <div class="filter-body">
+                            <form id="priceFilterForm">
+                                <div class="price-range">
+                                    <h5>Khoảng giá</h5>
+                                    <div class="form-group">
+                                        <div class="price-input">
+                                            <span class="currency">₫</span>
+                                            <input type="number" id="minPrice" 
+                                                   class="form-control" 
+                                                   placeholder="Giá tối thiểu" 
+                                                   step="5000"
+                                                   min="0">
+                                        </div>
+                                    </div>
+                                    <div class="price-separator">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="price-input">
+                                            <span class="currency">₫</span>
+                                            <input type="number" id="maxPrice" 
+                                                   class="form-control" 
+                                                   placeholder="Giá tối đa" 
+                                                   step="5000"
+                                                   min="0"
+                                                   value="50000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn filter-btn">
+                                    <i class="fas fa-search"></i> Áp dụng
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9 col-md-8">
+                    <!-- Category Filter -->
+                    <div class="category-filter">
+                        <ul class="filters_menu">
+                            <li class="active" data-filter="*">
+                                <a style="cursor:pointer" onclick="showAllProducts()">Tất cả</a>
+                            </li>
+                            @await Component.InvokeAsync("LoaiSpMenu")
+                        </ul>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-container">
+                        <div id="displayProducts" class="row grid">
+                            <!-- Products will be displayed here -->
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-section">
+                        <div id="pagination-controls" class="btn-group">
+                            <!-- Pagination buttons will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script>
+    const ITEMS_PER_PAGE = 9; // Number of items per page
+    let currentPage = 1;
+    let allProducts = []; // Store all products
+
+    $(document).ready(function () {
+        showAllProducts();
+    });
+
+    // Hàm hiển thị tất cả sản phẩm
+    function showAllProducts() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:5067/api/productapi',
+            dataType: 'json',
+            success: function (data) {
+                allProducts = data;
+                displayProductsWithPagination(data);
+            },
+            error: function (xhr) {
+                alert("Có lỗi xảy ra khi tải danh sách món ăn. Vui lòng thử lại sau.");
+            }
+        });
+    }
+
+    // Hàm tìm kiếm sản phẩm theo tên
+    function searchProductByName() {
+        const productName = $('#searchInput').val().trim();
+        if (productName) {
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:5067/api/productapi/search?name=${encodeURIComponent(productName)}`,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length) {
+                        currentPage = 1;
+                        allProducts = data;
+                        displayProductsWithPagination(data);
+                    } else {
+                        alert("Không tìm thấy món ăn nào phù hợp với từ khóa tìm kiếm.");
+                    }
+                },
+                error: function (xhr) {
+                    alert("Không tìm thấy món ăn nào phù hợp với từ khóa tìm kiếm.");
+                }
+            });
+        } else {
+            alert("Vui lòng nhập tên món ăn cần tìm kiếm.");
+        }
+    }
+
+    // Hàm hiển thị danh sách sản phẩm lên giao diện
+    function displayProducts(data) {
+        $('#displayProducts').html(data.map(val => `
+            <div class="col-sm-6 col-lg-4 all ${val.category}">
+                <div class="box">
+                    <div>
+                        <div class="img-box" onclick="window.location.href='/Home/ChiTietSanPham?maSp=' + '${val.productId}'">
+                            <img src="@Url.Content("~/Anh/AnhMonAn/")${$.trim(val.imageUrl)}" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5 class="product-name">${$.trim(val.name)}</h5>
+                            <p>${$.trim(val.description)}</p>
+                            <div class="options">
+                                <h6>${$.trim(val.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} VNĐ</h6>
+                                <a href="javascript:void(0)" onclick="openAddToCartModal('${val.productId}', '${val.name}', '${val.price}')">
+                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                                        <g><g><path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"></path></g></g>
+                                        <g><g><path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4C457.728,97.71,450.56,86.958,439.296,84.91z"></path></g></g>
+                                        <g><g><path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"></path></g></g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join(''));
+    }
+
+    // Add event listeners to validate prices on input
+    document.getElementById('minPrice').addEventListener('input', validatePrices);
+    document.getElementById('maxPrice').addEventListener('input', validatePrices);
+
+    function validatePrices() {
+        let minPrice = document.getElementById('minPrice');
+        let maxPrice = document.getElementById('maxPrice');
+        
+        // If both values are filled
+        if (minPrice.value && maxPrice.value) {
+            if (parseInt(minPrice.value) > parseInt(maxPrice.value)) {
+                alert("Giá tối thiểu không được lớn hơn giá tối đa!");
+                minPrice.value = ''; // Clear min price
+            }
+        }
+    }
+
+    document.getElementById('priceFilterForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let minPrice = document.getElementById('minPrice').value;
+        let maxPrice = document.getElementById('maxPrice').value;
+
+        if (!minPrice && !maxPrice) {
+            alert("Vui lòng nhập ít nhất một mức giá (tối thiểu hoặc tối đa).");
+            return;
+        }
+
+        // Add validation for negative values
+        if ((minPrice && minPrice < 0) || (maxPrice && maxPrice < 0)) {
+            alert("Giá không thể là số âm. Vui lòng nhập lại.");
+            return;
+        }
+
+        // Add validation for min > max
+        if (minPrice && maxPrice && parseInt(minPrice) > parseInt(maxPrice)) {
+            alert("Giá tối thiểu không thể lớn hơn giá tối đa. Vui lòng nhập lại.");
+            minPrice = ''; // Clear min price
+            return;
+        }
+
+        filterProductsByPrice(minPrice ? minPrice : null, maxPrice ? maxPrice : null);
+    });
+
+    function filterProductsByPrice(min, max) {
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost:5067/api/productapi/filter?minPrice=${min}&maxPrice=${max}`,
+            dataType: 'json',
+            success: function (data) {
+                currentPage = 1;
+                allProducts = data;
+                displayProductsWithPagination(data);
+            },
+            error: function (xhr) {
+                alert("Không tìm thấy món ăn nào trong khoảng giá đã chọn. Vui lòng thử lại với khoảng giá khác.");
+            }
+        });
+    }
+
+    // New function to handle pagination
+    function displayProductsWithPagination(data) {
+        const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const currentProducts = data.slice(startIndex, endIndex);
+
+        displayProducts(currentProducts);
+        updatePaginationControls(totalPages);
+    }
+
+    // New function to update pagination controls
+    function updatePaginationControls(totalPages) {
+        const controls = $('#pagination-controls');
+        controls.empty();
+
+        // Previous button
+        controls.append(`
+            <button class="btn btn-outline-primary" 
+                    onclick="changePage(${currentPage - 1})" 
+                    ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        `);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            controls.append(`
+                <button class="btn ${i === currentPage ? 'btn-primary' : 'btn-outline-primary'}" 
+                        onclick="changePage(${i})">
+                    ${i}
+                </button>
+            `);
+        }
+
+        // Next button
+        controls.append(`
+            <button class="btn btn-outline-primary" 
+                    onclick="changePage(${currentPage + 1})" 
+                    ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        `);
+    }
+
+    // New function to change page
+    function changePage(newPage) {
+        if (newPage < 1 || newPage > Math.ceil(allProducts.length / ITEMS_PER_PAGE)) return;
+        currentPage = newPage;
+        displayProductsWithPagination(allProducts);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+<style>
+    /* General Layout */
+    .menu-page-container {
+        padding: 20px 0;
+        background-color: #f8f9fa;
+    }
+
+    /* Header Styles */
+    .menu-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 0;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-header h1 {
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .menu-header .subtitle {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    /* Search Section */
+    .search-section {
+        margin-bottom: 40px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-input {
+        border: 2px solid #ffbe33;
+        padding: 15px;
+        border-radius: 30px 0 0 30px !important;
+        font-size: 16px;
+    }
+
+    .search-btn {
+        background-color: #ffbe33;
+        border: none;
+        color: white;
+        padding: 0 30px;
+        border-radius: 0 30px 30px 0 !important;
+        transition: all 0.3s ease;
+    }
+
+    /* Filter Card */
+    .filter-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+
+    .filter-header {
+        background: #ffbe33;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .filter-body {
+        padding: 20px;
+    }
+
+    /* Category Filter */
+    .category-filter {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .filters_menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .filters_menu li {
+        padding: 8px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f8f9fa;
+    }
+
+    .filters_menu li.active {
+        background: #ffbe33;
+        color: white;
+    }
+
+    /* Products Grid */
+    .products-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-card {
+        transition: transform 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Pagination Section */
+    .pagination-section {
+        margin-top: 40px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    #pagination-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #pagination-controls .btn {
+        min-width: 40px;
+        height: 40px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 768px) {
+        .filter-card {
+            position: static !important;
+        }
+
+        .menu-header h1 {
+            font-size: 2rem;
+        }
+
+        .filters_menu {
+            justify-content: center;
+        }
+    }
+
+    /* Price Input Styles */
+    .price-input {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    .price-input .currency {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    .price-input input {
+        padding-left: 25px;
+    }
+
+    /* Product Card Enhancements */
+    .box {
+        background: #222831;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .img-box {
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .box:hover .img-box img {
+        transform: scale(1.05);
+    }
+
+    .detail-box {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+    }
+
+    .detail-box h5.product-name {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .detail-box p {
+        color: #cccccc;
+        margin-bottom: 15px;
+        flex-grow: 1;
+    }
+
+    .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .options h6 {
+        font-size: 1.1rem;
+        color: #ffbe33;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .options a {
+        background: #ffbe33;
+        padding: 8px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .options a:hover {
+        background: #e6a820;
+        transform: scale(1.1);
+    }
+
+    .options svg {
+        width: 20px;
+        height: 20px;
+        fill: white;
+    }
+</style>
+

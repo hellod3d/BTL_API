@@ -1,0 +1,164 @@
+﻿@using BTL.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<User>
+
+@{
+    ViewData["Title"] = "QuanLyTaiKhoan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h1>Quản lý tài khoản</h1>
+                    <div>
+                        <p class="text-secondary font-weight-bold text-primary">@TempData["Message"]</p>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead style="background-color: #344767;">
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên khách hàng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên tài khoản
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Số điện thoại
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Email
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Địa chỉ
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Postcode
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mật khẩu
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ngày tạo
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ảnh
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>              
+                            <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Mobile)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.PostCode)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Password)
+                                        </td>
+                                        <td class="text-secondary text-xxs">
+                                                @Html.DisplayFor(modelItem => item.CreateDate)
+                                        </td>
+                                        <td style="justify-content:center;">
+                                            <img src="@Url.Content("../Anh/AnhNguoiDung/"+item.ImageUrl)" alt="Alternate Text" class="avatar avatar-lg me-3" />
+                                                @*  @Html.DisplayFor(modelItem => item.ImageUrl) *@
+                                        </td>
+                                        <td>
+                                            <a class="text-uppercase text-secondary text-xxs" asp-action="removeuser" asp-route-userid="@item.UserId">Delete</a>
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product__pagination">
+        @Html.PagedListPager(Model, page => Url.Action("QuanLyTaiKhoan", new { page = page }))
+    </div>
+    <style>
+        div[class="product__pagination"] {
+            justify-items: safe center;
+        }
+
+        .product__pagination {
+            padding-top: 10px;
+        }
+
+            .product__pagination .active {
+                display: inline-block;
+                width: 30px;
+                background-color: #344767;
+                border-color: #344767;
+                color: white;
+                height: 30px;
+                border: 1px solid #b2b2b2;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 28px;
+                border-radius: 5px 5px 5px 5px;
+                text-align: center;
+                -webkit-transition: all, 0.3s;
+                -moz-transition: all, 0.3s;
+                -ms-transition: all, 0.3s;
+                -o-transition: all, 0.3s;
+                transition: all, 0.3s;
+            }
+
+            .product__pagination a {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                border: 1px solid #b2b2b2;
+                font-size: 14px;
+                color: #b2b2b2;
+                font-weight: 700;
+                line-height: 28px;
+                text-align: center;
+                border-radius: 5px 5px 5px 5px;
+                -webkit-transition: all, 0.3s;
+                -moz-transition: all, 0.3s;
+                -ms-transition: all, 0.3s;
+                -o-transition: all, 0.3s;
+                transition: all, 0.3s;
+            }
+
+                .product__pagination a:hover {
+                    background-color: #344767;
+                    border-color: #344767;
+                    color: white;
+                }
+
+                .product__pagination a:last-child {
+                    margin-right: 0;
+                }
+    </style>
+</div>
+
+
+
+
+

@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+    <title>Hương Việt - Đăng Nhập</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+
+    <style>
+        .login-section {
+            background: url('../images/bg_s1.png') center/cover no-repeat;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-header h2 {
+            color: #222831;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .form-control {
+            height: 45px;
+            border-radius: 22px;
+            padding: 10px 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+        }
+
+        .btn-login {
+            background-color: #ffbe33;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            width: 100%;
+            height: 45px;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #e69c00;
+            transform: translateY(-2px);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #ffbe33;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            color: #e69c00;
+        }
+
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            color: #ffbe33;
+            text-decoration: none;
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .brand-logo img {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="login-section">
+        <a href="/" class="back-to-home">
+            <i class="fa fa-arrow-left"></i>
+            Về Trang Chủ
+        </a>
+        <div class="login-container">
+            <div class="login-box">
+                <div class="brand-logo">
+                    <img src="~/images/465975933_845807367766373_164030523367652719_n.png" alt="Hương Việt Logo">
+                </div>
+                <div class="login-header">
+                    <h2>Chào Mừng Trở Lại</h2>
+                    <p>Vui lòng đăng nhập để tiếp tục</p>
+                </div>
+
+                @using (Html.BeginForm("Login", "Access", FormMethod.Post))
+                {
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary(true)
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Tên đăng nhập", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Mật khẩu", required = "required" })
+                    </div>
+
+                    <button type="submit" class="btn btn-login">Đăng Nhập</button>
+
+                    <div class="signup-link">
+                        <p>Chưa có tài khoản? <a asp-action="Register">Đăng Ký Ngay</a></p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.js"></script>
+</body>
+</html>

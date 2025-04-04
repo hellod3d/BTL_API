@@ -1,0 +1,94 @@
+﻿@using BTL.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<BTL.Models.Order>
+@{
+    ViewData["Title"] = "QuanLyDon";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h1>Quản lý đơn hàng</h1>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p class="text-secondary font-weight-bold text-primary">@TempData["Message"]</p>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead style="background-color: #344767;">
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mã đơn hàng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mã sản phẩm
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Số lượng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mã khách hàng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tổng thanh toán
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Trạng thái
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mã thanh toán
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ngày đặt đơn
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.OrderDetailsId)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.ProductId)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.UserId)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.ToTalBill)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.PaymentId)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.OrderDate)
+                                        </td>
+                                        <td>
+                                            <a class="text-uppercase text-secondary text-xxs" asp-action="suaquanlydon" asp-route-orderid="@item.OrderDetailsId">Fin</a>
+                                            <a class="text-uppercase text-secondary text-xxs" asp-action="xoaquanlydon" asp-route-orderid="@item.OrderDetailsId">Del</a>
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

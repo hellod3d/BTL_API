@@ -1,0 +1,134 @@
+﻿@using BTL.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<Category>
+@{
+    ViewData["Title"] = "LoaiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h1>Loại sản phẩm</h1>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p class="text-secondary font-weight-bold text-primary">@TempData["Message"]</p>
+                        <p>
+                            <a asp-action="ThemLoaiSanPhamMoi" style="font-weight:bold; cursor: pointer; margin-right:15px">
+                                Thêm loại món ăn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead style="background-color: #344767;">
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder opacity-7">
+                                        Tên loại sản phẩm
+                                    </th>
+                                  @*   <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder opacity-7">
+                                        Hiện/ Ẩn
+                                    </th> *@
+                                    <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder opacity-7">
+                                        Ngày tạo
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxl-start font-weight-bolder opacity-7">
+                                        Ảnh
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td class="text-secondary font-weight-bold text-primary">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                      @*   <td class="text-secondary font-weight-bold text-primary">
+                                                @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td> *@
+                                        <td class="text-secondary font-weight-bold text-primary">
+                                                @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td style="justify-content:center;">
+                                            <img src="@Url.Content("~/Anh/AnhMonAn/"+item.ImageUrl)" alt="@item.Name" style="width:60px; height:60px;" />
+                                        </td>
+                                        <td>
+                                            <a class="text-secondary font-weight-bold text-primary" asp-action="SuaLoaiSanPham" asp-route-loaiSanPham="@item.CategoryId">Edit</a> |
+                                            <a class="text-secondary font-weight-bold text-primary" asp-action="XoaLoaiSanPham" asp-route-maLoaiSanPham="@item.CategoryId">Delete</a>
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product__pagination">
+        @Html.PagedListPager(Model, page => Url.Action("LoaiSanPham", new { page = page }))
+    </div>
+    <style>
+        div[class="product__pagination"] {
+            justify-items: safe center;
+        }
+
+        .product__pagination {
+            padding-top: 10px;
+        }
+
+            .product__pagination .active {
+                display: inline-block;
+                width: 30px;
+                background-color: #344767;
+                border-color: #344767;
+                color: white;
+                height: 30px;
+                border: 1px solid #b2b2b2;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 28px;
+                border-radius: 5px 5px 5px 5px;
+                text-align: center;
+                -webkit-transition: all, 0.3s;
+                -moz-transition: all, 0.3s;
+                -ms-transition: all, 0.3s;
+                -o-transition: all, 0.3s;
+                transition: all, 0.3s;
+            }
+
+            .product__pagination a {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                border: 1px solid #b2b2b2;
+                font-size: 14px;
+                color: #b2b2b2;
+                font-weight: 700;
+                line-height: 28px;
+                text-align: center;
+                border-radius: 5px 5px 5px 5px;
+                -webkit-transition: all, 0.3s;
+                -moz-transition: all, 0.3s;
+                -ms-transition: all, 0.3s;
+                -o-transition: all, 0.3s;
+                transition: all, 0.3s;
+            }
+
+                .product__pagination a:hover {
+                    background-color: #344767;
+                    border-color: #344767;
+                    color: white;
+                }
+
+                .product__pagination a:last-child {
+                    margin-right: 0;
+                }
+    </style>
+</div>

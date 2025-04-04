@@ -1,0 +1,298 @@
+﻿@model BTL.Models.Booking
+@{
+    ViewData["Title"] = "Đặt bàn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Booking Section -->
+<section class="book_section">
+    <div class="container">
+        <!-- Heading -->
+        <div class="heading_container">
+            <h2>
+                Đặt bàn ngay
+                <hr class="heading_line">
+            </h2>
+            <p class="heading_description">Hãy để chúng tôi chuẩn bị một bàn hoàn hảo cho bạn</p>
+        </div>
+
+        <!-- Booking Content -->
+        <div class="row booking_content justify-content-between">
+            <!-- Booking Form -->
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form asp-action="book" class="booking_form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Personal Information -->
+                        <div class="form_group">
+                            <label class="form_label">
+                                <i class="fa fa-user input_icon"></i>
+                                <span>Họ và tên</span>
+                            </label>
+                            <div class="input_group">
+                                <input asp-for="UserName" type="text" class="form-control" />
+                            </div>
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form_group">
+                            <label class="form_label">
+                                <i class="fa fa-phone input_icon"></i>
+                                <span>Số điện thoại</span>
+                            </label>
+                            <div class="input_group">
+                                <input asp-for="PhoneNumber" type="text" class="form-control" />
+                            </div>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form_group">
+                            <label class="form_label">
+                                <i class="fa fa-envelope input_icon"></i>
+                                <span>Email</span>
+                            </label>
+                            <div class="input_group">
+                                <input asp-for="Email" type="email" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Booking Details -->
+                        <div class="form_group">
+                            <label class="form_label">
+                                <i class="fa fa-calendar input_icon"></i>
+                                <span>Ngày đặt</span>
+                            </label>
+                            <div class="input_group">
+                                <input asp-for="Date" type="datetime-local" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="form_group">
+                            <label class="form_label">
+                                <i class="fa fa-users input_icon"></i>
+                                <span>Số người</span>
+                            </label>
+                            <div class="input_group">
+                                <select asp-for="Number" class="form-control">
+                                    <option value="" disabled selected>Chọn số người</option>
+                                    <option value="1">1 người</option>
+                                    <option value="2">2 người</option>
+                                    <option value="3">3 người</option>
+                                    <option value="4">4 người</option>
+                                    <option value="5">5 người</option>
+                                    <option value="6">6 người trở lên</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="btn_box">
+                            <button type="submit">
+                                <i class="fa fa-calendar-check"></i>
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="col-md-5">
+                <div class="map_container h-100">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.096947657244!2d105.80262807500752!3d21.028511080615344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab424a50fff9%3A0xbe3a7f3670c0a45f!2zMyBQLiBD4bqndSBHaeG6pXksIEzDoW5nIFRoxrDhu6NuZywgxJDhu5FuZyDEkGEsIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700584996979!5m2!1svi!2s"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Section Styles */
+    .book_section {
+        position: relative;
+        background-color: #ffffff;
+        padding: 75px 0;
+    }
+
+    /* Heading Styles */
+    .heading_container {
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+        .heading_container h2 {
+            position: relative;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+    .heading_line {
+        width: 80px;
+        height: 3px;
+        background-color: #ffbe33;
+        margin: 15px auto;
+        border: none;
+    }
+
+    .heading_description {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    /* Form Styles */
+    .form_container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        width: 100%;
+    }
+
+    .form_group {
+        margin-bottom: 25px;
+        width: 100%;
+    }
+
+    .form_label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .input_icon {
+        color: #ffbe33;
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    .input_group {
+        position: relative;
+        width: 100%;
+    }
+
+    .form-control {
+        width: 100%;
+        border: 1px solid #eee;
+        height: 50px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        background-color: #fff;
+        outline: none;
+        color: #000000;
+        transition: all 0.3s;
+        font-size: 15px;
+    }
+
+        .form-control:focus {
+            border-color: #ffbe33;
+            box-shadow: 0 0 0 2px rgba(255,190,51,0.2);
+        }
+
+    select.form-control {
+        padding-right: 30px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffbe33' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 15px) center;
+    }
+
+    /* Responsive Styles */
+    @@media (max-width: 768px) {
+        .form_label {
+            font-size: 14px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+    }
+
+    /* Thêm padding cho cột trong row */
+    .row > [class*='col-'] {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Button Styles */
+    .btn_box {
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+        .btn_box button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 45px;
+            background-color: #ffbe33;
+            color: #ffffff;
+            border-radius: 45px;
+            border: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+            .btn_box button:hover {
+                background-color: #e69c00;
+                transform: translateY(-2px);
+            }
+
+    /* Map Styles */
+    .map_container {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    /* Form và Map Styles */
+    .booking_content {
+        align-items: stretch;
+    }
+
+    .form_container {
+        height: 100%;
+        background: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .map_container {
+        min-height: 500px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive Styles */
+    @@media (max-width: 768px) {
+        .map_container {
+            margin-top: 30px;
+            min-height: 300px;
+        }
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

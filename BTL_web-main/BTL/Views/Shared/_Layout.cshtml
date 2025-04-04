@@ -1,0 +1,757 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Feane </title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!-- nice select  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Add SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <!-- Add this line -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="~/images/bg_homepage.jpg" alt="">
+        </div>
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" href="#">
+                  @*       <img style="width:150px; height:auto;" src="~/images/465975933_845807367766373_164030523367652719_n.png" alt="Alternate Text" /> *@
+                         <span>
+                                Hương Việt
+                            </span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""> </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav  mx-auto ">
+                            <li class="nav-item">
+                                <a style="font-weight: 500;" class="nav-link" asp-action="Index">Trang chủ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="font-weight: 500;" class="nav-link" asp-action="Menu">Thực đơn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="font-weight: 500;" class="nav-link" asp-action="About">Giới thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="font-weight: 500;" class="nav-link" asp-action="Book">Đặt bàn</a>
+                            </li>
+                        </ul>
+                        <div class="user_option">
+                            <a asp-action="UserProfile" class="user_link">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <a class="cart_link" href="#" onclick="toggleCart(event)">
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                                <g>
+                                <g>
+                                <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                   c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                    </g>
+                  </g>
+                                <g>
+                                <g>
+                                <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                   C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                   c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                   C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                    </g>
+                  </g>
+                                <g>
+                                <g>
+                                <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                   c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                    </g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                                <g>
+                  </g>
+                </svg>
+                            </a>
+                            <form class="form-inline" onsubmit="scrollToSearchBar(event)">
+                                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                            @inject IHttpContextAccessor HttpContextAccessor
+                            @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                            {
+                                <form asp-controller="Home" asp-action="Logout" method="post">
+                                    <button type="submit" style="background-color: transparent; border: 1px hidden"><i class="fa-solid fa-right-from-bracket"></i></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a style="color: white; font-weight: bold;" class="nav-link" href="@Url.Action("Login", "Access")">Đăng nhập</a>
+                            }
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+        <!-- slider section -->
+        <section class="slider_section ">
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Từ tình yêu ẩm thực, tới tâm huyết phục vụ
+                                        </h1>
+                                        <p id="detail">
+                                            Qua từng món ăn, chúng tôi lưu giữ hương vị đậm đà của quê hương, thổi hồn vào văn hóa, lịch sử Việt Nam và truyền lại cho những thế hệ mai sau, để giá trị xưa mãi trường tồn theo thời gian.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a asp-area="Home" asp-action="Book" class="btn1">
+                                                Đặt ngay
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end slider section -->
+        <!-- Add this new cart form after the header section -->
+        <div id="cartForm" class="cart-form" style="display: none;">
+            <div class="cart-header">
+                <h3>Giỏ Hàng Của Bạn</h3>
+                <span class="close-cart" onclick="hideCart()">&times;</span>
+            </div>
+            <ul id="cartItems"></ul>
+            <p>Tổng cộng: <span id="cartTotal">0 VNĐ</span></p>
+            <button onclick="checkout()">Thanh Toán</button>
+        </div>
+    </div>
+
+    <!-- offer section -->
+    <!-- end offer section -->
+    <!-- food section -->
+    @RenderBody()
+    <!-- end food section -->
+    <!-- about section -->
+    <!-- end client section -->
+    <!-- footer section -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <div class="footer_contact">
+                        <h4>
+                            Liên Hệ
+                        </h4>
+                        <div class="contact_link_box">
+                            <a href="">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <span>
+                                    Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội.
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>
+                                    Call +01 1234567890
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>
+                                    demo@gmail.com
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <div class="footer_detail">
+                        <a href="" class="footer-logo">
+                            Hương Việt
+                        </a>
+                        <p>
+                            Đến với không gian của Hương Việt, thực khách sẽ có một trải nghiệm tưởng lạ mà quen, khi truyền thống và hiện đại, mộc mạc và cao cấp cùng hòa quyện
+                        </p>
+                        <div class="footer_social">
+                            <a href="">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h4>
+                        Giờ mở cửa
+                    </h4>
+                    <p>
+                        Mọi ngày trong tuần
+                    </p>
+                    <p>
+                        9.00 - 23.00
+                    </p>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    <a href="https://html.design/">Free Html Templates</a><br><br>
+                    &copy; <span id="displayYear"></span> Distributed By
+                    <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- footer section -->
+    <!-- jQery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+    </script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+    </script>
+    <!-- End Google Map -->
+    <!-- Modal Add to Cart -->
+    <div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addToCartModalLabel">Thêm vào giỏ hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addToCartForm">
+                        <input type="hidden" id="productId" name="productId" />
+                        <div class="form-group">
+                            <label for="productName" class="col-form-label">Tên sản phẩm:</label>
+                            <input type="text" class="form-control" id="productName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice" class="col-form-label">Giá:</label>
+                            <input type="text" class="form-control" id="productPrice" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity" class="col-form-label">Số lượng:</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmAddToCart()">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add custom CSS for modal -->
+    <style>
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #dee2e6;
+            background-color: #ffbe33;
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #dee2e6;
+        }
+
+        .btn-primary {
+            background-color: #ffbe33;
+            border-color: #ffbe33;
+        }
+
+            .btn-primary:hover {
+                background-color: #e69c00;
+                border-color: #e69c00;
+            }
+
+        .form-control:read-only {
+            background-color: #f8f9fa;
+        }
+    </style>
+
+    <!-- Add custom CSS for cart form -->
+    <style>
+        .cart-form {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 300px;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .close-cart {
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+            .close-cart:hover {
+                color: #000;
+            }
+
+        .cart-form ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-form button {
+            background-color: #ffbe33;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .cart-form button:hover {
+                background-color: #e69c00;
+            }
+    </style>
+
+    <!-- Modify the JavaScript for modal functionality -->
+    <script>
+        let cart = [];
+
+        function openAddToCartModal(productId, name, price) {
+            $('#productId').val(productId);
+            $('#productName').val(name);
+            $('#productPrice').val(price);
+            $('#quantity').val(1);
+            $('#addToCartModal').modal('show');
+        }
+
+        function confirmAddToCart() {
+            const productId = $('#productId').val();
+            const name = $('#productName').val();
+            const price = parseFloat($('#productPrice').val());
+            const quantity = parseInt($('#quantity').val());
+
+            // Gửi request đến server để lưu vào database
+            $.ajax({
+                url: '/Home/AddToCart',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Add to local cart array
+                        cart.push({ productId, name, price, quantity });
+                        updateCartDisplay();
+                        $('#addToCartModal').modal('hide');
+                        
+                        // Hiển thị thông báo thành công
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Product added to cart successfully',
+                            icon: 'success',
+                            confirmButtonColor: '#ffbe33'
+                        });
+                    } else if (response.requireLogin) {
+                        window.location.href = response.loginUrl;
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: response.message || 'Failed to add product to cart',
+                            icon: 'error',
+                            confirmButtonColor: '#ffbe33'
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while adding to cart',
+                        icon: 'error',
+                        confirmButtonColor: '#ffbe33'
+                    });
+                }
+            });
+        }
+
+        function toggleCart(event) {
+            event.preventDefault();
+            const cartForm = document.getElementById('cartForm');
+            if (cartForm.style.display === 'none') {
+                cartForm.style.display = 'block';
+                updateCartDisplay(); // Refresh cart contents when showing
+            } else {
+                cartForm.style.display = 'none';
+            }
+        }
+
+        function hideCart() {
+            document.getElementById('cartForm').style.display = 'none';
+        }
+
+        function updateCartDisplay() {
+            $.ajax({
+                url: '/Home/GetCartItems',
+                type: 'GET',
+                success: function(data) {
+                    if (data.requireLogin) {
+                        window.location.href = data.loginUrl;
+                        return;
+                    }
+
+                    let cartItems = $('#cartItems');
+                    let cartTotal = 0;
+                    cartItems.empty();
+
+                    data.forEach((item) => {
+                        cartItems.append(`
+                            <li>
+                                <img src="@Url.Content("~/Anh/AnhMonAn/")${$.trim(item.imageUrl)}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px;">
+                                ${item.name} - ${item.price.toLocaleString('vi-VN')} VNĐ 
+                                <div class="quantity-controls">
+                                    <button onclick="updateQuantity(${item.productId}, -1)">-</button>
+                                    <span class="quantity-display">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.productId}, 1)">+</button>
+                                </div>
+                                <span class="remove-item" onclick="removeFromCart(${item.productId})">&times;</span>
+                            </li>
+                        `);
+                        cartTotal += item.price * item.quantity;
+                    });
+
+                    $('#cartTotal').text(cartTotal.toLocaleString('vi-VN') + ' VNĐ');
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Không thể tải các sản phẩm trong giỏ hàng',
+                        icon: 'error',
+                        confirmButtonColor: '#ffbe33'
+                    });
+                }
+            });
+        }
+
+        function updateQuantity(productId, change) {
+            const currentQuantityElement = $(`#cartItems li:has([onclick*="${productId}"]) .quantity-display`);
+            let newQuantity = parseInt(currentQuantityElement.text()) + change;
+            
+            if (newQuantity < 1) {
+                newQuantity = 1;
+                return;
+            }
+
+            $.ajax({
+                url: '/api/ProductAPI/update-cart/' + productId,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({ quantity: newQuantity }),
+                success: function(response) {
+                    if (response.success) {
+                        updateCartDisplay();
+                    } else if (response.requireLogin) {
+                        window.location.href = response.loginUrl;
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: response.message || 'Failed to update quantity',
+                            icon: 'error',
+                            confirmButtonColor: '#ffbe33'
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while updating quantity',
+                        icon: 'error',
+                        confirmButtonColor: '#ffbe33'
+                    });
+                }
+            });
+        }
+
+        function removeFromCart(productId) {
+            $.ajax({
+                url: '/Home/RemoveFromCart',
+                type: 'POST',
+                data: { productId: productId },
+                success: function(response) {
+                    if (response.success) {
+                        updateCartDisplay();
+                        if ($('#cartItems li').length === 0) {
+                            hideCart();
+                        }
+                    } else if (response.requireLogin) {
+                        window.location.href = response.loginUrl;
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: response.message || 'Failed to remove item from cart',
+                            icon: 'error',
+                            confirmButtonColor: '#ffbe33'
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while removing item',
+                        icon: 'error',
+                        confirmButtonColor: '#ffbe33'
+                    });
+                }
+            });
+        }
+
+        function checkout() {
+            // Check if user is logged in by making an AJAX call
+            $.ajax({
+                url: '/Cart/CheckLoginStatus',
+                type: 'GET',
+                success: function (response) {
+                    if (response.isLoggedIn) {
+                        // User is logged in, proceed with checkout
+                        window.location.href = '/Cart/Checkout';
+                    } else {
+                        // User is not logged in, redirect to login
+                        window.location.href = '/Access/Login?ReturnUrl=/Cart/Checkout';
+                    }
+                },
+                error: function () {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
+    </script>
+
+    <!-- Add additional CSS for cart items -->
+    <style>
+        #cartItems li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .remove-item {
+            cursor: pointer;
+            color: #ff0000;
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
+            .remove-item:hover {
+                color: #cc0000;
+            }
+    </style>
+
+    <!-- Add this before closing body tag -->
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+                function scrollToSearchBar(event) {
+            event.preventDefault(); // Ngừng hành động mặc định của form
+
+            // Cuộn trang đến phần tử có id "searchBar"
+            document.getElementById('searchBar').scrollIntoView({
+                behavior: 'smooth', // Cuộn mư��t mà
+                block: 'start' // Đảm bảo cuộn đến đầu phần tử
+            });
+
+            // Tự động focus vào ô input để người dùng có thể bắt đầu nhập
+            document.getElementById('searchInput').focus();
+        }
+
+    </script>
+
+    <!-- Add jQuery, Bootstrap JS, and other scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <!-- Nút để hiển thị form -->
+    <button type="button" class="contact-button" onclick="toggleForm()"><img style="width: 60px; height: auto;" src="../images/text.png" alt="Alternate Text" /></button>
+    <!-- Form liên hệ -->
+    <div class="contact-form-overlay" id="contactForm" style="display:none;">
+        @await Html.PartialAsync("_ContactFormPartial", new BTL.Models.Contact())
+    </div>
+
+    <style>
+        .contact-form-overlay {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: auto;
+            height: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none; /* Form ẩn ban đầu */
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 9999;
+            border-radius: 10px;
+            margin-bottom: 60px;
+        }
+
+        .contact-form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-button, .contact-button:focus {
+            background-color: transparent;
+            border: hidden;
+            position: fixed;
+            bottom: 20px;
+            outline: none;
+            box-shadow: none;
+            right: 20px;
+            z-index: 9999;
+        }
+    </style>
+
+    <script>
+        function toggleForm() {
+            var form = document.getElementById('contactForm');
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "flex"; // Hiển thị form
+            } else {
+                form.style.display = "none"; // Ẩn form
+            }
+        }
+    </script>
+</body>
+
+</html>
+<style>
+    body {
+        background-image: url(../images/vintage-bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    p#detail {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 500;
+        font-size: medium;
+    }
+
+    i[class="fa-solid fa-right-from-bracket"] {
+        color: white;
+    }
+</style>

@@ -1,0 +1,80 @@
+﻿@using BTL.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Contact>
+@{
+    ViewData["Title"] = "QuanLyTinNhan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h1>Quản lý tin nhắn</h1>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p class="text-secondary font-weight-bold text-primary">@TempData["Message"]</p>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead style="background-color: #344767;">
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mã liên lạc
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên khách hàng
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Email
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tiêu đề
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tin nhắn
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ngày tạo
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.ContactId)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Subject)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.Message)
+                                        </td>
+                                        <td class="text-secondary font-weight-bold text-xxs">
+                                                @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td>
+                                            <a class="text-secondary font-weight-bold text-xxs" asp-action="XoaTinNhan" asp-route-contactid="@item.ContactId">Delete</a>
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
